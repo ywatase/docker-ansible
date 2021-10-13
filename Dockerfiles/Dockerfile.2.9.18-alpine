@@ -1,0 +1,4 @@
+FROM alpine:latest
+RUN apk add -U $(apk -U info -Rq ansible) py3-pip py3-wheel \
+    && pip3 --no-cache-dir install ansible==2.9.18 ansible-lint \
+    && rm -rf /var/cache/apk/*

@@ -1,0 +1,8 @@
+#!/bin/sh
+ansible_versions="3.1.0 3.2.0 3.3.0 3.4.0 4.0.0 4.1.0 4.2.0 4.3.0 4.4.0 4.5.0 4.6.0"
+for VERSION in $ansible_versions
+do
+  docker build -t ywatase/ansible:$VERSION-slim -f ./Dockerfiles/Dockerfile.$VERSION-slim .
+  docker run -it ywatase/ansible:$VERSION-slim ansible-playbook --version
+#  docker build -t ywatase/ansible:$VERSION-alpine -f ./Dockerfiles/Dockerfile.$VERSION-alpine .
+done

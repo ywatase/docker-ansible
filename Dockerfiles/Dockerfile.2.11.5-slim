@@ -1,5 +1,5 @@
 FROM python:3.7-slim-buster as builder
-RUN pip3 install ansible==2.9.18 ansible-lint
+RUN pip3 install ansible==2.11.5 ansible-lint
 
 FROM python:3.7-slim-buster
 COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages

@@ -4,4 +4,4 @@ RUN pip3 install ansible==2.4.6 ansible-lint
 FROM python:3.7-slim-buster
 COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
 COPY --from=builder /usr/local/bin/ansible /usr/local/bin
-COPY --from=builder /usr/local/bin/ansible-lint /usr/local/bin
+COPY --from=builder /usr/local/bin/ansible-* /usr/local/bin

@@ -1,5 +1,6 @@
 #!/bin/sh
-ansible_versions="2.4.6 2.5.15 2.6.20 2.7.18 2.8.19 2.9.18 2.10.7 3.0.0"
+#ansible_versions="2.4.6 2.5.15 2.6.20 2.7.18 2.8.19 2.9.18 2.10.7 3.0.0 3.1.0"
+ansible_versions="3.1.0 3.2.0 3.3.0 3.4.0 4.0.0 4.1.0 4.2.0 4.3.0 4.4.0 4.5.0 4.6.0"
 main() {
     [ -d Dockerfiles ] || mkdir Dockerfiles
     for tag in $ansible_versions
@@ -20,13 +21,13 @@ END
 
 dump_dockerfile_slim () {
 cat <<END
-FROM python:3.7-slim-buster as builder
+FROM python:3.9-slim as builder
 RUN pip3 install ansible==$tag ansible-lint
 
-FROM python:3.7-slim-buster
-COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+FROM python:3.9-slim
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 COPY --from=builder /usr/local/bin/ansible /usr/local/bin
-COPY --from=builder /usr/local/bin/ansible-lint /usr/local/bin
+COPY --from=builder /usr/local/bin/ansible-* /usr/local/bin
 END
 }
 
